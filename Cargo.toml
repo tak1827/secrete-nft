@@ -1,7 +1,6 @@
 [package]
-name = "cosmwasm_nft"
+name = "secrete-nft"
 version = "0.1.0"
-authors = ["shiki.tak <shiki.tak@gmail.com>"]
 edition = "2018"
 
 exclude = [
