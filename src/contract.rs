@@ -92,6 +92,9 @@ fn transfer_from<S: Storage, A: Api, Q: Querier>(
     let recipient_address_raw = deps.api.canonical_address(recipient)?;
     let token_id = TokenId::new(value);
 
+    // validation allowance
+    validate_allowance(&deps.storage, &token_id, &recipient_address_raw)?;
+
     execute_transfer(deps, &sender_address_raw, &recipient_address_raw, &token_id)
 }
 
@@ -106,9 +109,6 @@ fn execute_transfer<S: Storage, A: Api, Q: Querier>(
 
     // validation token owner
     validate_token_owner(&deps.storage, &token_id, &from)?;
-
-    // validation allowance
-    validate_allowance(&deps.storage, &token_id, &to)?;
 
     /* update owner_tokens_store */
     // for from addr
